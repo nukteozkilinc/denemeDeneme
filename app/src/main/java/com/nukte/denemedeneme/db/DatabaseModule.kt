@@ -1,4 +1,5 @@
 package com.nukte.denemedeneme.db
+
 import android.content.Context
 import androidx.room.Room
 import androidx.room.RoomDatabase
@@ -15,23 +16,17 @@ class DatabaseModule {
 
     @Singleton
     @Provides
-    fun provideNewsDao(newsDatabase : NewsDatabase) : NewsDao{
+    fun provideNewsDao(newsDatabase: NewsDatabase): NewsDao {
         return newsDatabase.newsDao()
     }
 
     @Provides
     @Singleton
     fun provideNewsDatabase(
-        @ApplicationContext appContext : Context,
-        roomCallBack : RoomDatabase.Callback
-    ) : NewsDatabase{
+        @ApplicationContext appContext: Context
+    ): NewsDatabase {
         return Room.databaseBuilder(
-            appContext,
-            NewsDatabase::class.java,
-            "newsTable"
-        )
-            .fallbackToDestructiveMigration()
-            .addCallback(roomCallBack)
-            .build()
+            appContext, NewsDatabase::class.java, "news_database"
+        ).fallbackToDestructiveMigration().build()
     }
 }

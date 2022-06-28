@@ -25,11 +25,9 @@ class DashboardFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-
-        return root
+        return binding.root
     }
     override fun onDestroyView() {
         super.onDestroyView()
@@ -41,9 +39,9 @@ class DashboardFragment : Fragment() {
 
         val saveAdapter = SaveAdapter()
         binding.saveRecyclerView.adapter = saveAdapter
-        dashboardViewModel.news.observe(viewLifecycleOwner,{
+        dashboardViewModel.getSavedNews().observe(viewLifecycleOwner) {
             saveAdapter.submitList(it)
-        })
+        }
 
     }
 }

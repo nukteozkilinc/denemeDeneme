@@ -19,4 +19,5 @@ data class News(
     var publishedAt : String,
     @ColumnInfo(name = "content")
     var content : String,
+    var isSaved : Boolean
 ) : java.io.Serializable

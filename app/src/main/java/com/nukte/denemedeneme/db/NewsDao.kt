@@ -7,13 +7,16 @@ import com.nukte.denemedeneme.News
 @Dao
 interface NewsDao {
     @Insert
-    fun insertAll( news:News)
+    suspend fun insert(news: News)
 
     @Query("SELECT * FROM newsTable order by newsId ASC") //@get:Query
-    fun getAllNews() : LiveData<List<News>>
+    fun getAllNews(): LiveData<List<News>>
+
+    @Query("SELECT EXISTS(SELECT * FROM newsTable WHERE publishedAt == :publishedAt)")
+    suspend fun isSavedBefore(publishedAt: String): Boolean
 
     //@Delete
     //suspend fun deleteNews(news: News)
-    @Query("DELETE from newsTable where newsId = :newsId")
-    fun deleteNews(vararg newsId  : Int) : Int
+    @Query("DELETE from newsTable where publishedAt = :publishedAt")
+    suspend fun deleteNews(vararg publishedAt: String)
 }

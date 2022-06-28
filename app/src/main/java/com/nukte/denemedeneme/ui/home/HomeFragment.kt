@@ -50,24 +50,18 @@ class HomeFragment : Fragment() {
         val newsAdapter = ItemListAdapter()
         binding.recyclerView.adapter = newsAdapter
 
-        homeViewModel.news.observe(viewLifecycleOwner,{
+        homeViewModel.news.observe(viewLifecycleOwner) {
             newsAdapter.submitList(it)
-        })
+        }
 
         newsAdapter.onItemClicked = {
             action = HomeFragmentDirections.actionNavigationHomeToDetailScreen().setNews(it)
             findNavController().navigate(action)
         }
-        button = binding.recyclerView.findViewById(R.id.save_button)
-        button.setOnClickListener {
-            newsAdapter.saveNews = {
-                dashboardViewModel.saveNews(it)
-                Snackbar.make(view,"Başarı ile kaydedildi.",Snackbar.LENGTH_LONG).show()
-            }
+        newsAdapter.onSaveButtonClicked = {
+            dashboardViewModel.saveNews(it)
+            Snackbar.make(view,"Başarı ile kaydedildi.",Snackbar.LENGTH_LONG).show()
         }
-
-
-
     }
 
     override fun onDestroyView() {

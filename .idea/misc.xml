@@ -20,6 +20,15 @@
         <entry key="..\:/SDK/denemeDeneme/app/src/main/res/layout/recycler_layout.xml" value="0.264" />
         <entry key="..\:/SDK/denemeDeneme/app/src/main/res/layout/save_recycler_layout.xml" value="0.275" />
         <entry key="..\:/SDK/denemeDeneme/app/src/main/res/menu/bottom_nav_menu.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_favorite_news.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_heart_filled.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/save_button_image.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.11956521739130435" />
+        <entry key="app/src/main/res/layout/detail_screen_fragment.xml" value="0.11956521739130435" />
+        <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.1734375" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.2807971014492754" />
+        <entry key="app/src/main/res/layout/recycler_layout.xml" value="0.18" />
+        <entry key="app/src/main/res/layout/save_recycler_layout.xml" value="0.2807971014492754" />
       </map>
     </option>
   </component>
