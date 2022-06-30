@@ -27,7 +27,7 @@ class HomeViewModel @Inject constructor(
 
     fun fetchNews() =  viewModelScope.launch {
         val news = newsDataSource.getHomeNews()
-        delay(2000)
+        //delay(2000)
         newsLiveData.value = news
     }
     fun saveNews(news: News) = viewModelScope.launch {

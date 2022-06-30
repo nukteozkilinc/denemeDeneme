@@ -4,32 +4,22 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.TextView
-import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.ivbaranov.mfb.MaterialFavoriteButton
-import com.google.android.material.snackbar.Snackbar
 import com.nukte.denemedeneme.*
 import com.nukte.denemedeneme.databinding.FragmentHomeBinding
-import com.nukte.denemedeneme.ui.dashboard.DashboardViewModel
+import com.nukte.denemedeneme.ui.dashboard.FavoriteViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import org.w3c.dom.Text
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
 
     private val homeViewModel: HomeViewModel by viewModels()
     lateinit var button : MaterialFavoriteButton
-    private val dashboardViewModel : DashboardViewModel by viewModels()
+    private val favoriteViewModel : FavoriteViewModel by viewModels()
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
@@ -66,12 +56,12 @@ class HomeFragment : Fragment() {
             homeViewModel.deleteNews(it)
         }
 
-
     }
 
     override fun onResume() {
         super.onResume()
         homeViewModel.fetchNews()
+
     }
 
     override fun onDestroyView() {

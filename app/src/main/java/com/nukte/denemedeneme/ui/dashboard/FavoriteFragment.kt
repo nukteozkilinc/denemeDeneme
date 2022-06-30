@@ -4,25 +4,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
-import com.nukte.denemedeneme.R
 import com.nukte.denemedeneme.SaveAdapter
-import com.nukte.denemedeneme.databinding.FragmentDashboardBinding
-import com.nukte.denemedeneme.ui.home.HomeFragmentDirections
-import com.nukte.denemedeneme.ui.home.HomeViewModel
+import com.nukte.denemedeneme.databinding.FragmentFavoriteBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class DashboardFragment : Fragment() {
+class FavoriteFragment : Fragment() {
 
-    private val dashboardViewModel: DashboardViewModel by viewModels()
-    private var _binding: FragmentDashboardBinding? = null
+    private val favoriteViewModel: FavoriteViewModel by viewModels()
+    private var _binding: FragmentFavoriteBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -30,7 +24,7 @@ class DashboardFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentDashboardBinding.inflate(inflater, container, false)
+        _binding = FragmentFavoriteBinding.inflate(inflater, container, false)
         return binding.root
     }
     override fun onDestroyView() {
@@ -45,15 +39,15 @@ class DashboardFragment : Fragment() {
         val saveAdapter = SaveAdapter()
         binding.saveRecyclerView.adapter = saveAdapter
         saveAdapter.onItemClicked = {
-            action = DashboardFragmentDirections.actionNavigationDashboardToDetailScreen().setNews(it)
+            action = FavoriteFragmentDirections.actionNavigationDashboardToDetailScreen().setNews(it)
             findNavController().navigate(action)
         }
-        dashboardViewModel.getSavedNews().observe(viewLifecycleOwner) {
+        favoriteViewModel.getSavedNews().observe(viewLifecycleOwner) {
             saveAdapter.submitList(it)
         }
 
         saveAdapter.onUnsaveButtonClicked={
-            dashboardViewModel.deleteNews(it)
+            favoriteViewModel.deleteNews(it)
         }
 
     }

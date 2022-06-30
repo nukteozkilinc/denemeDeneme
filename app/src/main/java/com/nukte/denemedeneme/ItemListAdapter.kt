@@ -1,19 +1,12 @@
 package com.nukte.denemedeneme
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.github.ivbaranov.mfb.MaterialFavoriteButton
 import com.nukte.denemedeneme.databinding.RecyclerLayoutBinding
-import com.nukte.denemedeneme.databinding.SaveRecyclerLayoutBinding
-import com.nukte.denemedeneme.ui.dashboard.DashboardViewModel
 
 class ItemListAdapter() : ListAdapter<News, ItemListAdapter.ItemListViewHolder>(NewsComparator) {
 
@@ -63,9 +56,9 @@ class ItemListAdapter() : ListAdapter<News, ItemListAdapter.ItemListViewHolder>(
 
 object NewsComparator : DiffUtil.ItemCallback<News>() {
     override fun areItemsTheSame(oldItem: News, newItem: News): Boolean =
-        oldItem.title == newItem.title
+        oldItem.publishedAt == newItem.publishedAt
 
     override fun areContentsTheSame(oldItem: News, newItem: News): Boolean =
-        oldItem.description == newItem.description
+        oldItem == newItem
 }
 

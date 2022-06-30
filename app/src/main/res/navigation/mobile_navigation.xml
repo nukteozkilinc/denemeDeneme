@@ -20,10 +20,10 @@
     </fragment>
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.nukte.denemedeneme.ui.dashboard.DashboardFragment"
+        android:id="@+id/navigation_favorite"
+        android:name="com.nukte.denemedeneme.ui.dashboard.FavoriteFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard">
+        tools:layout="@layout/fragment_favorite">
         <action
             android:id="@+id/action_navigation_dashboard_to_detailScreen"
             app:destination="@id/detailScreen" />

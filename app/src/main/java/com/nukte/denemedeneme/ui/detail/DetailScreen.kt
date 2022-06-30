@@ -21,26 +21,21 @@ import com.nukte.denemedeneme.R
 import com.nukte.denemedeneme.databinding.DetailScreenFragmentBinding
 import com.nukte.denemedeneme.databinding.FragmentHomeBinding
 import com.nukte.denemedeneme.ui.home.HomeViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import javax.security.auth.callback.Callback
 
+@AndroidEntryPoint
 class DetailScreen : Fragment() {
 
 private val args : DetailScreenArgs by navArgs()
+    private val detailScreenViewModel : DetailScreenViewModel by viewModels()
     private var _binding: DetailScreenFragmentBinding? = null
-    private val homeViewModel : HomeViewModel by viewModels()
     private val binding get() = _binding!!
-    var newsDetail  :News?=null
-
-    companion object {
-        fun newInstance() = DetailScreen()
-    }
-
-    private lateinit var viewModel: DetailScreenViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = DetailScreenFragmentBinding.inflate(inflater, container, false)
         val root: View = binding.root
         return root
@@ -54,16 +49,6 @@ private val args : DetailScreenArgs by navArgs()
             binding.titleDetail.text = it.title
             binding.contentDetail.text = it.content
             binding.dateDetail.text = it.publishedAt
-
         }
-
-
     }
-
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(DetailScreenViewModel::class.java)
-    }
-
 }

@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class DashboardViewModel @Inject constructor(
+class FavoriteViewModel @Inject constructor(
     private val newsRepositoryImp: NewsRepository
 ) : ViewModel() {
     private val newsLiveData = MutableLiveData<List<News>>()
