@@ -24,6 +24,9 @@
         android:name="com.nukte.denemedeneme.ui.dashboard.DashboardFragment"
         android:label="@string/title_dashboard"
         tools:layout="@layout/fragment_dashboard">
+        <action
+            android:id="@+id/action_navigation_dashboard_to_detailScreen"
+            app:destination="@id/detailScreen" />
     </fragment>
 
     <fragment

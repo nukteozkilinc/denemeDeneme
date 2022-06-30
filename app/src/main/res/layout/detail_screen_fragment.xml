@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:text="Title"
             android:textColor="@color/black"
-            android:textSize="30sp" />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/contentDetail"
@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:text="Content"
             android:textColor="@color/black"
-            android:textSize="25sp" />
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/dateDetail"
@@ -56,13 +56,11 @@
             android:layout_height="wrap_content"/>
 
         <com.github.ivbaranov.mfb.MaterialFavoriteButton
-            android:layout_width="78dp"
             android:id="@+id/save_button"
+            android:layout_width="78dp"
             android:layout_height="69dp"
-            android:layout_below="@+id/dateDetail"
             android:layout_marginStart="350dp"
             android:layout_marginTop="36dp"
-            android:layout_toEndOf="@id/imageDetail"
             app:mfb_animate_favorite="true"
             app:mfb_animate_unfavorite="false"
             app:mfb_bounce_duration="300"
@@ -73,6 +71,7 @@
             app:mfb_rotation_duration="400"
             app:mfb_size="55"
             app:mfb_type="heart" />
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

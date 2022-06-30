@@ -9,9 +9,13 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavDirections
+import androidx.navigation.fragment.findNavController
 import com.nukte.denemedeneme.R
 import com.nukte.denemedeneme.SaveAdapter
 import com.nukte.denemedeneme.databinding.FragmentDashboardBinding
+import com.nukte.denemedeneme.ui.home.HomeFragmentDirections
+import com.nukte.denemedeneme.ui.home.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -36,11 +40,20 @@ class DashboardFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        var action : NavDirections
 
         val saveAdapter = SaveAdapter()
         binding.saveRecyclerView.adapter = saveAdapter
+        saveAdapter.onItemClicked = {
+            action = DashboardFragmentDirections.actionNavigationDashboardToDetailScreen().setNews(it)
+            findNavController().navigate(action)
+        }
         dashboardViewModel.getSavedNews().observe(viewLifecycleOwner) {
             saveAdapter.submitList(it)
+        }
+
+        saveAdapter.onUnsaveButtonClicked={
+            dashboardViewModel.deleteNews(it)
         }
 
     }

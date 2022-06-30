@@ -12,18 +12,24 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
+import com.nukte.denemedeneme.News
 import com.nukte.denemedeneme.R
 import com.nukte.denemedeneme.databinding.DetailScreenFragmentBinding
 import com.nukte.denemedeneme.databinding.FragmentHomeBinding
+import com.nukte.denemedeneme.ui.home.HomeViewModel
 import javax.security.auth.callback.Callback
 
 class DetailScreen : Fragment() {
+
 private val args : DetailScreenArgs by navArgs()
     private var _binding: DetailScreenFragmentBinding? = null
+    private val homeViewModel : HomeViewModel by viewModels()
     private val binding get() = _binding!!
+    var newsDetail  :News?=null
 
     companion object {
         fun newInstance() = DetailScreen()
@@ -48,17 +54,16 @@ private val args : DetailScreenArgs by navArgs()
             binding.titleDetail.text = it.title
             binding.contentDetail.text = it.content
             binding.dateDetail.text = it.publishedAt
+
         }
 
 
     }
 
 
-
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(DetailScreenViewModel::class.java)
-        // TODO: Use the ViewModel
     }
 
 }

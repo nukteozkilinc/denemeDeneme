@@ -7,30 +7,41 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.nukte.denemedeneme.databinding.SaveRecyclerLayoutBinding
 
 class SaveAdapter() : androidx.recyclerview.widget.ListAdapter<News, SaveAdapter.SaveViewHolder>(NewsComparator) {
-    class SaveViewHolder (itemView : View) : RecyclerView.ViewHolder(itemView) {
+    var onItemClicked: ((news: News) -> Unit)? = null
+    var onUnsaveButtonClicked: ((news: News) -> Unit)? = null
+
+    class SaveViewHolder (val binding : SaveRecyclerLayoutBinding)
+        : RecyclerView.ViewHolder(binding.root) {
 
         fun bindSaveItems(news:News){
-
-                val saveTitle = itemView.findViewById(R.id.saveTitleText) as TextView
-                val saveDescription = itemView.findViewById(R.id.saveDescriptionText) as TextView
-                val savePublishedAt = itemView.findViewById(R.id.savePublishedAt) as TextView
-                val save_image_view = itemView.findViewById(R.id.save_image_view) as ImageView
-
-                Glide.with(itemView).load(news.urlToImage).into(save_image_view)
-                saveDescription.text = news.description
-                saveTitle.text = news.title
-                savePublishedAt.text = news.publishedAt
+                Glide.with(itemView).load(news.urlToImage).into(binding.saveImageView)
+                binding.saveDescriptionText.text = news.description
+                binding.saveTitleText.text = news.title
+                binding.savePublishedAt.text = news.publishedAt
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SaveViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.save_recycler_layout,parent,false)
-        return SaveViewHolder(view)
+        val binding = SaveRecyclerLayoutBinding.inflate(LayoutInflater.from(parent.context), parent,false)
+        return SaveViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: SaveViewHolder, position: Int) {
         holder.bindSaveItems(getItem(position))
+        holder.itemView.setOnClickListener {
+            onItemClicked?.invoke(getItem(position))
+        }
+
+        holder.binding.saveButton.isFavorite= true
+        holder.binding.saveButton.setOnFavoriteAnimationEndListener{_,favorite ->
+            when(favorite){
+                false -> onUnsaveButtonClicked?.invoke(getItem(position))
+            }
+        }
+
+
     }
 }

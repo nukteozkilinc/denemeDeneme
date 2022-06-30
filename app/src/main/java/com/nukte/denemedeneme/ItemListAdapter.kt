@@ -38,8 +38,6 @@ class ItemListAdapter() : ListAdapter<News, ItemListAdapter.ItemListViewHolder>(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemListViewHolder {
         val binding =
             RecyclerLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-//        val view =
-//            LayoutInflater.from(parent.context).inflate(R.layout.recycler_layout, parent, false)
         return ItemListViewHolder(binding)
     }
 
@@ -53,6 +51,10 @@ class ItemListAdapter() : ListAdapter<News, ItemListAdapter.ItemListViewHolder>(
         holder.binding.saveButton.setOnFavoriteChangeListener { _, favorite ->
             when (favorite) {
                 true -> onSaveButtonClicked?.invoke(getItem(position))
+            }
+        }
+        holder.binding.saveButton.setOnFavoriteAnimationEndListener{_,favorite ->
+            when(favorite){
                 false -> onUnsaveButtonClicked?.invoke(getItem(position))
             }
         }

@@ -17,14 +17,11 @@ class DashboardViewModel @Inject constructor(
     private val newsLiveData = MutableLiveData<List<News>>()
     var news: LiveData<List<News>> = newsLiveData
 
-    fun saveNews(news: News) = viewModelScope.launch {
-        newsRepositoryImp.saveNews(news)
-    }
-
     fun getSavedNews() = newsRepositoryImp.getAllNews()
 
     fun deleteNews(news: News) = viewModelScope.launch {
         newsRepositoryImp.deleteNews(news.publishedAt)
+        news.isSaved=false
     }
 
 

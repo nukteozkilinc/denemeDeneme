@@ -59,9 +59,19 @@ class HomeFragment : Fragment() {
             findNavController().navigate(action)
         }
         newsAdapter.onSaveButtonClicked = {
-            dashboardViewModel.saveNews(it)
-            Snackbar.make(view,"Başarı ile kaydedildi.",Snackbar.LENGTH_LONG).show()
+            homeViewModel.saveNews(it)
         }
+
+        newsAdapter.onUnsaveButtonClicked={
+            homeViewModel.deleteNews(it)
+        }
+
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        homeViewModel.fetchNews()
     }
 
     override fun onDestroyView() {

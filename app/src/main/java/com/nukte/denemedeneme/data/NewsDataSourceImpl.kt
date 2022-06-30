@@ -14,7 +14,12 @@ class NewsDataSourceImpl @Inject constructor(
         val newsList = api.getNews().articles
         newsList.map {
             newsDao.isSavedBefore(publishedAt = it.publishedAt).let { isSavedBefore ->
-                if (isSavedBefore) it.isSaved = true
+                if (isSavedBefore){
+                    it.isSaved = true
+                }
+                else if(!isSavedBefore){
+                    it.isSaved = false
+                }
             }
         }
         return newsList
