@@ -4,16 +4,10 @@
     <item
         android:id="@+id/navigation_home"
         android:icon="@drawable/ic_breaking_news"
-        android:title="Breaking News" />
+        android:title="Anasayfa" />
 
     <item
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/navigation_favorite"
         android:icon="@drawable/ic_favorite_news"
-        android:title="Favorite News" />
-
-    <item
-        android:id="@+id/navigation_notifications"
-        android:icon="@drawable/ic_all_news"
-        android:title="Search News" />
-
+        android:title="Favoriler" />
 </menu>

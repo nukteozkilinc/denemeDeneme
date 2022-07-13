@@ -8,42 +8,49 @@
     <fragment
         android:id="@+id/navigation_home"
         android:name="com.nukte.denemedeneme.ui.home.HomeFragment"
-        android:label="@string/title_home"
+        android:label="Anasayfa"
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_navigation_home_to_detailScreen"
             app:destination="@id/detailScreen" />
         <action
-            android:id="@+id/action_navigation_home_to_navigation_dashboard"
-            app:destination="@id/navigation_dashboard" />
+            android:id="@+id/action_navigation_home_to_navigation_favorite"
+            app:destination="@id/navigation_favorite" />
+        <action
+            android:id="@+id/action_navigation_home_to_searchFragment"
+            app:destination="@id/searchFragment" />
 
     </fragment>
 
     <fragment
         android:id="@+id/navigation_favorite"
-        android:name="com.nukte.denemedeneme.ui.dashboard.FavoriteFragment"
-        android:label="@string/title_dashboard"
+        android:name="com.nukte.denemedeneme.ui.favorite.FavoriteFragment"
+        android:label="Favorilerim"
         tools:layout="@layout/fragment_favorite">
         <action
-            android:id="@+id/action_navigation_dashboard_to_detailScreen"
+            android:id="@+id/action_navigation_favorite_to_detailScreen"
             app:destination="@id/detailScreen" />
     </fragment>
 
-    <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.nukte.denemedeneme.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+
     <fragment
         android:id="@+id/detailScreen"
         android:name="com.nukte.denemedeneme.ui.detail.DetailScreen"
-        android:label="DetailScreen"
+        android:label="Detay Ekranı"
         tools:layout="@layout/detail_screen_fragment"
         >
         <argument
             android:name="news"
             app:argType="com.nukte.denemedeneme.News"
-            app:nullable="true"
-            android:defaultValue="@null" />
+             />
+    </fragment>
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.nukte.denemedeneme.ui.search.SearchFragment"
+        android:label="Ara"
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_searchFragment_to_detailScreen"
+            app:destination="@id/detailScreen" />
     </fragment>
 </navigation>

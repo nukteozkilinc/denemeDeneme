@@ -1,24 +1,35 @@
 package com.nukte.denemedeneme.di
 
 import com.nukte.denemedeneme.api.NewsApi
-import com.nukte.denemedeneme.data.NewsDataSource
-import com.nukte.denemedeneme.data.NewsDataSourceImpl
-import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.Body
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
+
+    class MyInterceptor : Interceptor{
+        @Singleton
+        override fun intercept(chain: Interceptor.Chain): Response {
+
+            val originalRequest = chain.request()
+            val request = originalRequest.newBuilder()
+                .header("x-api-key", "0fNU1fr_sxg_IBeX5Zl0jhYoEbh_QbWJXD2w4doq5fg")
+                .build()
+            val response = chain.proceed(request)
+            return response
+        }
+
+    }
 
     @Provides
     @Singleton
@@ -28,8 +39,8 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideOkHttpClient(httpLogging : HttpLoggingInterceptor) =
-        OkHttpClient.Builder().addInterceptor(httpLogging).build()
+    fun provideOkHttpClient(httpLoggingInterceptor: HttpLoggingInterceptor) =
+        OkHttpClient.Builder().addInterceptor(MyInterceptor()).addInterceptor(httpLoggingInterceptor).build()
 
 
     @Provides

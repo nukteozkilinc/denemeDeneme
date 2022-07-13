@@ -1,16 +1,22 @@
-package com.nukte.denemedeneme.ui.dashboard
+package com.nukte.denemedeneme.ui.favorite
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
+import androidx.paging.ExperimentalPagingApi
 import com.nukte.denemedeneme.SaveAdapter
 import com.nukte.denemedeneme.databinding.FragmentFavoriteBinding
 import dagger.hilt.android.AndroidEntryPoint
+import io.reactivex.annotations.Experimental
+import kotlinx.coroutines.flow.collectLatest
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class FavoriteFragment : Fragment() {
@@ -38,10 +44,12 @@ class FavoriteFragment : Fragment() {
 
         val saveAdapter = SaveAdapter()
         binding.saveRecyclerView.adapter = saveAdapter
+
         saveAdapter.onItemClicked = {
-            action = FavoriteFragmentDirections.actionNavigationDashboardToDetailScreen().setNews(it)
+            action = FavoriteFragmentDirections.actionNavigationFavoriteToDetailScreen(it)
             findNavController().navigate(action)
         }
+
         favoriteViewModel.getSavedNews().observe(viewLifecycleOwner) {
             saveAdapter.submitList(it)
         }

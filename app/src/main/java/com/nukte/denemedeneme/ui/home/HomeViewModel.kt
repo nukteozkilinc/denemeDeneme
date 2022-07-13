@@ -1,15 +1,16 @@
 package com.nukte.denemedeneme.ui.home
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import com.nukte.denemedeneme.News
 import com.nukte.denemedeneme.data.NewsDataSource
 import com.nukte.denemedeneme.data.repository.NewsRepository
-import com.nukte.denemedeneme.data.repository.NewsRepositoryImpl
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -18,26 +19,26 @@ class HomeViewModel @Inject constructor(
     private val newsDataSource: NewsDataSource,
     private val newsRepositoryImp: NewsRepository
 ) : ViewModel() {
-    private val newsLiveData = MutableLiveData<List<News>>()
-    val news : LiveData<List<News>> = newsLiveData
+    private val newsLiveData = MutableLiveData<PagingData<News>>()
+     val news: LiveData<PagingData<News>> = newsLiveData
 
     init {
-       fetchNews()
+        fetchNews()
     }
 
-    fun fetchNews() =  viewModelScope.launch {
-        val news = newsDataSource.getHomeNews()
-        //delay(2000)
-        newsLiveData.value = news
+    fun fetchNews() = viewModelScope.launch{
+        newsDataSource.getHomeNews().cachedIn(viewModelScope).collect{
+            newsLiveData.value = it
+        }
     }
+
     fun saveNews(news: News) = viewModelScope.launch {
-            newsRepositoryImp.saveNews(news)
-            news.isSaved=true
+        news.isSaved = true
+        newsRepositoryImp.saveNews(news)
     }
+
     fun deleteNews(news: News) = viewModelScope.launch {
-            newsRepositoryImp.deleteNews(news.publishedAt)
-            news.isSaved=false
-
-
+        news.isSaved = false
+        newsRepositoryImp.deleteNews(news._id)
     }
 }

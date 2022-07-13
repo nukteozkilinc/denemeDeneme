@@ -1,42 +1,34 @@
 package com.nukte.denemedeneme.ui.detail
-
-import android.app.AlertDialog
-import android.content.ContentValues.TAG
-import androidx.lifecycle.ViewModelProvider
+import android.content.Intent
+import android.content.Intent.FLAG_GRANT_READ_URI_PERMISSION
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
-import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
-import com.nukte.denemedeneme.News
-import com.nukte.denemedeneme.R
 import com.nukte.denemedeneme.databinding.DetailScreenFragmentBinding
-import com.nukte.denemedeneme.databinding.FragmentHomeBinding
-import com.nukte.denemedeneme.ui.home.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import javax.security.auth.callback.Callback
+import java.net.URI
 
 @AndroidEntryPoint
 class DetailScreen : Fragment() {
 
-private val args : DetailScreenArgs by navArgs()
+    private val args : DetailScreenArgs by navArgs()
     private val detailScreenViewModel : DetailScreenViewModel by viewModels()
     private var _binding: DetailScreenFragmentBinding? = null
     private val binding get() = _binding!!
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = DetailScreenFragmentBinding.inflate(inflater, container, false)
+        _binding = DetailScreenFragmentBinding.inflate(
+            inflater, container, false
+        )
         val root: View = binding.root
         return root
     }
@@ -45,10 +37,44 @@ private val args : DetailScreenArgs by navArgs()
         super.onViewCreated(view, savedInstanceState)
 
         args.news?.let {
-            Glide.with(view).load(it.urlToImage).into(binding.imageDetail)
+            Glide.with(view).load(it.media).into(binding.imageDetail)
             binding.titleDetail.text = it.title
-            binding.contentDetail.text = it.content
-            binding.dateDetail.text = it.publishedAt
+            binding.contentDetail.text = it.summary
+            binding.dateDetail.text = it.published_date
+            binding.saveButton.isFavorite = it.isSaved
         }
+
+
+        binding.saveButton.setOnFavoriteChangeListener{_,favorite ->
+            args.news.isSaved = true
+            when(favorite){
+                true -> detailScreenViewModel.saveNews(args.news)
+            }
+
+        }
+        binding.saveButton.setOnFavoriteAnimationEndListener{_,favorite->
+            args.news.isSaved = false
+            when(favorite){
+                false -> detailScreenViewModel.deleteNews(args.news)
+            }
+        }
+
+        binding.shareButton.setOnClickListener{
+            val uri = URI(args.news.link)
+            println("URL $uri")
+            shareNews(uri)
+
+        }
+    }
+
+    private fun shareNews(uri : URI){
+        val intent = Intent( )
+        intent.addFlags(FLAG_GRANT_READ_URI_PERMISSION)
+        intent.action = Intent.ACTION_SEND
+        intent.putExtra(Intent.EXTRA_TEXT,"Habere Göz At! ${uri.toURL()}")
+        intent.type = "text/plugin"
+        startActivity(Intent.createChooser(intent, "Share to : "))
+
+
     }
 }

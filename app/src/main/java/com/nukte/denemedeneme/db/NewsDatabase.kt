@@ -5,7 +5,9 @@ import com.nukte.denemedeneme.News
 
 
 @Database(
-    entities = [News::class],
+    entities = [
+        News::class
+               ],
     version = 2
 )
 abstract class NewsDatabase : RoomDatabase() {

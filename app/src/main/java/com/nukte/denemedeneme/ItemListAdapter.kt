@@ -2,13 +2,14 @@ package com.nukte.denemedeneme
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.nukte.denemedeneme.databinding.RecyclerLayoutBinding
 
-class ItemListAdapter() : ListAdapter<News, ItemListAdapter.ItemListViewHolder>(NewsComparator) {
+class ItemListAdapter() : PagingDataAdapter<News, ItemListAdapter.ItemListViewHolder>(NewsComparator) {
 
     var onItemClicked: ((news: News) -> Unit)? = null
     var onSaveButtonClicked: ((news: News) -> Unit)? = null
@@ -19,10 +20,10 @@ class ItemListAdapter() : ListAdapter<News, ItemListAdapter.ItemListViewHolder>(
 
         fun bindItems(news: News) {
             binding.saveButton.setFavorite(news.isSaved, false)
-            Glide.with(itemView).load(news.urlToImage).into(binding.imageView)
-            binding.descriptionText.text = news.description
+            Glide.with(itemView).load(news.media).into(binding.imageView)
+            binding.descriptionText.text = news.excerpt
             binding.titleText.text = news.title
-            binding.publishedAt.text = news.publishedAt
+            binding.publishedAt.text = news.published_date
         }
 
 
@@ -36,19 +37,20 @@ class ItemListAdapter() : ListAdapter<News, ItemListAdapter.ItemListViewHolder>(
 
 
     override fun onBindViewHolder(holder: ItemListViewHolder, position: Int) {
-        holder.bindItems(getItem(position))
-        holder.itemView.setOnClickListener {
-            onItemClicked?.invoke(getItem(position))
-        }
-
-        holder.binding.saveButton.setOnFavoriteChangeListener { _, favorite ->
-            when (favorite) {
-                true -> onSaveButtonClicked?.invoke(getItem(position))
+        getItem(position)?.let { news ->
+            holder.bindItems(news)
+            holder.itemView.setOnClickListener {
+                onItemClicked?.invoke(news)
             }
-        }
-        holder.binding.saveButton.setOnFavoriteAnimationEndListener{_,favorite ->
-            when(favorite){
-                false -> onUnsaveButtonClicked?.invoke(getItem(position))
+            holder.binding.saveButton.setOnFavoriteChangeListener { _, favorite ->
+                when (favorite) {
+                    true -> onSaveButtonClicked?.invoke(news)
+                }
+            }
+            holder.binding.saveButton.setOnFavoriteAnimationEndListener{_,favorite ->
+                when(favorite){
+                    false -> onUnsaveButtonClicked?.invoke(news)
+                }
             }
         }
     }
@@ -56,7 +58,7 @@ class ItemListAdapter() : ListAdapter<News, ItemListAdapter.ItemListViewHolder>(
 
 object NewsComparator : DiffUtil.ItemCallback<News>() {
     override fun areItemsTheSame(oldItem: News, newItem: News): Boolean =
-        oldItem.publishedAt == newItem.publishedAt
+        oldItem._id == newItem._id
 
     override fun areContentsTheSame(oldItem: News, newItem: News): Boolean =
         oldItem == newItem
