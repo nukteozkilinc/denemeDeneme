@@ -1,4 +1,5 @@
 package com.nukte.denemedeneme.ui.home
+
 import android.os.Bundle
 import android.view.*
 import android.widget.SearchView
@@ -20,50 +21,55 @@ class HomeFragment : Fragment() {
     private val homeViewModel: HomeViewModel by viewModels()
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
+    private val newsAdapter by lazy { ItemListAdapter() }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
         super.onViewCreated(view, savedInstanceState)
-        var action : NavDirections
+        initHomeRecyclerView()
+        initFloatActionButtonActions()
+        observeViewModel()
+    }
 
-
-        val newsAdapter = ItemListAdapter()
-        binding.recyclerView.adapter = newsAdapter
-
-        with(homeViewModel){
-            news.observe(viewLifecycleOwner) {
-                viewModelScope.launch {
+    private fun observeViewModel() = with(homeViewModel) {
+        news.observe(viewLifecycleOwner) {
+            binding.recyclerView.post {
+                lifecycleScope.launch {
                     newsAdapter.submitData(it)
                 }
             }
         }
+    }
 
-        newsAdapter.onItemClicked = {
-            action = HomeFragmentDirections.actionNavigationHomeToDetailScreen(it)
+    private fun initFloatActionButtonActions() = with(binding.floatingActionButton2) {
+        setOnClickListener {
+            val action = HomeFragmentDirections.actionNavigationHomeToSearchFragment()
             findNavController().navigate(action)
         }
-        newsAdapter.onSaveButtonClicked = {
-            homeViewModel.saveNews(it)
-        }
+    }
 
-        newsAdapter.onUnsaveButtonClicked={
-            homeViewModel.deleteNews(it)
-        }
+    private fun initHomeRecyclerView() {
+        with(newsAdapter) {
+            binding.recyclerView.adapter = this
 
+            onItemClicked = {
+                val action = HomeFragmentDirections.actionNavigationHomeToDetailScreen(it)
+                findNavController().navigate(action)
+            }
 
+            onSaveButtonClicked = {
+                homeViewModel.saveNews(it)
+            }
 
-        binding.floatingActionButton2.setOnClickListener {
-            action = HomeFragmentDirections.actionNavigationHomeToSearchFragment()
-            findNavController().navigate(action)
+            onUnsaveButtonClicked = {
+                homeViewModel.deleteNews(it)
+            }
         }
     }
 

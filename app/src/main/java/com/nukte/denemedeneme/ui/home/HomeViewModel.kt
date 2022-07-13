@@ -7,10 +7,7 @@ import com.nukte.denemedeneme.News
 import com.nukte.denemedeneme.data.NewsDataSource
 import com.nukte.denemedeneme.data.repository.NewsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

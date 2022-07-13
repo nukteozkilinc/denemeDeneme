@@ -43,7 +43,6 @@
                 android:id="@+id/titleDetail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/imageDetail"
                 android:layout_marginTop="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
@@ -55,7 +54,6 @@
                 android:id="@+id/contentDetail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/titleDetail"
                 android:layout_marginEnd="8dp"
                 android:layout_marginTop="8dp"
                 android:text="Content"
@@ -69,16 +67,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:layout_marginTop="8dp"
-                android:layout_below="@+id/contentDetail"
                 android:layout_marginStart="8dp"
                 android:text="Date"
-                android:textSize="10dp" />
+                android:textSize="10sp" />
 
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/dateDetail"
                 android:layout_marginLeft="100dp"
                 android:layout_marginTop="110dp"
                 android:orientation="horizontal">

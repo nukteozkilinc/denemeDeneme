@@ -41,10 +41,6 @@ class SearchAdapter() : ListAdapter<News,SearchAdapter.SearchAdapterViewHolder> 
         holder.binding.searchSaveButton.setOnFavoriteChangeListener { _, favorite ->
             when (favorite) {
                 true -> onSaveButtonClicked?.invoke(getItem(position))
-            }
-        }
-        holder.binding.searchSaveButton.setOnFavoriteAnimationEndListener{_,favorite ->
-            when(favorite){
                 false -> onUnsaveButtonClicked?.invoke(getItem(position))
             }
         }

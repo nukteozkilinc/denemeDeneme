@@ -17,8 +17,8 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class SearchFragment : Fragment() {
 
-    private val searchViewModel : SearchViewModel by viewModels()
-    private var _binding : FragmentSearchBinding ?= null
+    private val searchViewModel: SearchViewModel by viewModels()
+    private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -26,7 +26,7 @@ class SearchFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentSearchBinding.inflate(inflater,container,false)
+        _binding = FragmentSearchBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -40,26 +40,32 @@ class SearchFragment : Fragment() {
                 searchViewModel.getSearchNews(p0.toString())
                 return false
             }
+
             override fun onQueryTextChange(p0: String?): Boolean {
                 return false
             }
         })
 
-        searchViewModel.news.observe(viewLifecycleOwner){
-            searchAdapter.submitList(it)
-        }
-
         searchAdapter.onItemClicked = {
-            var action = SearchFragmentDirections.actionSearchFragmentToDetailScreen(it)
+            val action = SearchFragmentDirections.actionSearchFragmentToDetailScreen(it)
             findNavController().navigate(action)
         }
 
-        searchAdapter.onSaveButtonClicked ={
+        searchAdapter.onSaveButtonClicked = {
             searchViewModel.saveNews(it)
         }
 
-        searchAdapter.onUnsaveButtonClicked={
+        searchAdapter.onUnsaveButtonClicked = {
             searchViewModel.deleteNews(it)
         }
+
+        searchViewModel.news.observe(viewLifecycleOwner) {
+            searchAdapter.submitList(it)
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        searchViewModel.refreshSearchNews()
     }
 }

@@ -10,36 +10,24 @@
         <entry key="..\:/SDK/denemeDeneme/app/src/main/res/drawable/ic_notifications_black_24dp.xml" value="0.1" />
         <entry key="..\:/SDK/denemeDeneme/app/src/main/res/drawable/save_button.xml" value="0.2866666666666667" />
         <entry key="..\:/SDK/denemeDeneme/app/src/main/res/drawable/save_button_image.xml" value="0.2866666666666667" />
-        <entry key="..\:/SDK/denemeDeneme/app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="..\:/SDK/denemeDeneme/app/src/main/res/layout/date_layout.xml" value="0.4" />
-        <entry key="..\:/SDK/denemeDeneme/app/src/main/res/layout/deneme_layout.xml" value="0.1" />
+        <entry key="..\:/SDK/denemeDeneme/app/src/main/res/layout/activity_main.xml" value="0.22456140350877193" />
         <entry key="..\:/SDK/denemeDeneme/app/src/main/res/layout/design_deneme.xml" value="0.275" />
-        <entry key="..\:/SDK/denemeDeneme/app/src/main/res/layout/detail_adapter.xml" value="0.275" />
         <entry key="..\:/SDK/denemeDeneme/app/src/main/res/layout/detail_recycler_layout.xml" value="0.20833333333333334" />
-        <entry key="..\:/SDK/denemeDeneme/app/src/main/res/layout/detail_screen.xml" value="0.1" />
-        <entry key="..\:/SDK/denemeDeneme/app/src/main/res/layout/detail_screen_fragment.xml" value="0.4" />
+        <entry key="..\:/SDK/denemeDeneme/app/src/main/res/layout/detail_screen_fragment.xml" value="0.21694915254237288" />
         <entry key="..\:/SDK/denemeDeneme/app/src/main/res/layout/fragment_dashboard.xml" value="0.264" />
-        <entry key="..\:/SDK/denemeDeneme/app/src/main/res/layout/fragment_favorite.xml" value="0.275" />
         <entry key="..\:/SDK/denemeDeneme/app/src/main/res/layout/fragment_home.xml" value="0.264" />
-        <entry key="..\:/SDK/denemeDeneme/app/src/main/res/layout/fragment_notifications.xml" value="0.264" />
-        <entry key="..\:/SDK/denemeDeneme/app/src/main/res/layout/fragment_search.xml" value="0.275" />
+        <entry key="..\:/SDK/denemeDeneme/app/src/main/res/layout/fragment_notifications.xml" value="0.1390625" />
         <entry key="..\:/SDK/denemeDeneme/app/src/main/res/layout/recycler_layout.xml" value="0.264" />
-        <entry key="..\:/SDK/denemeDeneme/app/src/main/res/layout/save_recycler_layout.xml" value="0.1" />
-        <entry key="..\:/SDK/denemeDeneme/app/src/main/res/layout/search_recycler_layout.xml" value="0.275" />
+        <entry key="..\:/SDK/denemeDeneme/app/src/main/res/layout/save_recycler_layout.xml" value="0.275" />
         <entry key="..\:/SDK/denemeDeneme/app/src/main/res/menu/bottom_nav_menu.xml" value="0.1" />
-        <entry key="..\:/SDK/denemeDeneme/app/src/main/res/menu/date_menu.xml" value="0.275" />
-        <entry key="..\:/SDK/denemeDeneme/app/src/main/res/menu/date_picker.xml" value="0.275" />
-        <entry key="..\:/SDK/denemeDeneme/app/src/main/res/menu/search_menu.xml" value="0.275" />
-        <entry key="..\:/SDK/denemeDeneme/app/src/main/res/menu/sort_menu.xml" value="0.264" />
-        <entry key="..\:/SDK/denemeDeneme/app/src/main/res/menu/top_menu.xml" value="0.176" />
-        <entry key="..\:/SDK/denemeDeneme/app/src/main/res/menu/up_nav_menu.xml" value="0.275" />
         <entry key="app/src/main/res/drawable/ic_favorite_news.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_heart_filled.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/save_button_image.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.11956521739130435" />
-        <entry key="app/src/main/res/layout/detail_screen_fragment.xml" value="0.11956521739130435" />
+        <entry key="app/src/main/res/layout/detail_screen_fragment.xml" value="0.18" />
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.1734375" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.2807971014492754" />
+        <entry key="app/src/main/res/layout/fragment_search.xml" value="0.1734375" />
         <entry key="app/src/main/res/layout/recycler_layout.xml" value="0.18" />
         <entry key="app/src/main/res/layout/save_recycler_layout.xml" value="0.2807971014492754" />
       </map>
