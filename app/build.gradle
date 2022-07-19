@@ -95,4 +95,7 @@ dependencies {
     // Jetpack Compose Integration
     implementation "androidx.paging:paging-compose:1.0.0-alpha08"
 
+    //swipe fresh
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+
 }

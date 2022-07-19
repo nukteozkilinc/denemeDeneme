@@ -20,7 +20,6 @@ object NetworkModule {
     class MyInterceptor : Interceptor{
         @Singleton
         override fun intercept(chain: Interceptor.Chain): Response {
-
             val originalRequest = chain.request()
             val request = originalRequest.newBuilder()
                 .header("x-api-key", "0fNU1fr_sxg_IBeX5Zl0jhYoEbh_QbWJXD2w4doq5fg")

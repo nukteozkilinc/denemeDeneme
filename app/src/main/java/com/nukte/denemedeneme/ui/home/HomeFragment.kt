@@ -1,18 +1,20 @@
 package com.nukte.denemedeneme.ui.home
 
 import android.os.Bundle
+import android.os.Handler
 import android.view.*
-import android.widget.SearchView
-import androidx.core.view.contains
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.viewModelScope
-import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.bumptech.glide.load.engine.Resource
 import com.nukte.denemedeneme.*
 import com.nukte.denemedeneme.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -20,6 +22,7 @@ class HomeFragment : Fragment() {
 
     private val homeViewModel: HomeViewModel by viewModels()
     private var _binding: FragmentHomeBinding? = null
+    lateinit var swipeRefreshLayout: SwipeRefreshLayout
     private val binding get() = _binding!!
     private val newsAdapter by lazy { ItemListAdapter() }
 
@@ -35,6 +38,12 @@ class HomeFragment : Fragment() {
         initHomeRecyclerView()
         initFloatActionButtonActions()
         observeViewModel()
+
+        swipeRefreshLayout = binding.swipeRefresh
+
+        swipeRefreshLayout.setOnRefreshListener{
+            homeViewModel.fetchNews()
+        }
     }
 
     private fun observeViewModel() = with(homeViewModel) {
@@ -42,6 +51,8 @@ class HomeFragment : Fragment() {
             binding.recyclerView.post {
                 lifecycleScope.launch {
                     newsAdapter.submitData(it)
+                    binding.progressBar.isVisible = false
+                    swipeRefreshLayout.isRefreshing = false
                 }
             }
         }
