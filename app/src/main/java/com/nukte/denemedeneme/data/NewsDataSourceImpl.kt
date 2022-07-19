@@ -14,7 +14,7 @@ class NewsDataSourceImpl @Inject constructor(
     private val api: NewsApi,
     private val newsDao: NewsDao
 ) : NewsDataSource {
-        override suspend fun getHomeNews(): Flow<PagingData<News>> {
+        override fun getHomeNews(): Flow<PagingData<News>> {
             return Pager(
                 config = PagingConfig(
                     pageSize = NETWORK_PAGE_SIZE,

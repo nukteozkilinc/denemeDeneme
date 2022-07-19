@@ -15,6 +15,7 @@ import com.nukte.denemedeneme.*
 import com.nukte.denemedeneme.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -22,7 +23,6 @@ class HomeFragment : Fragment() {
 
     private val homeViewModel: HomeViewModel by viewModels()
     private var _binding: FragmentHomeBinding? = null
-    lateinit var swipeRefreshLayout: SwipeRefreshLayout
     private val binding get() = _binding!!
     private val newsAdapter by lazy { ItemListAdapter() }
 
@@ -39,21 +39,26 @@ class HomeFragment : Fragment() {
         initFloatActionButtonActions()
         observeViewModel()
 
-        swipeRefreshLayout = binding.swipeRefresh
-
-        swipeRefreshLayout.setOnRefreshListener{
-            homeViewModel.fetchNews()
+        binding.swipeRefresh.setOnRefreshListener{
+            newsAdapter.refresh() //paging var diye fetchnews ile istek atmana gerek yok
         }
     }
 
     private fun observeViewModel() = with(homeViewModel) {
-        news.observe(viewLifecycleOwner) {
+       /* news.observe(viewLifecycleOwner) {
             binding.recyclerView.post {
                 lifecycleScope.launch {
                     newsAdapter.submitData(it)
                     binding.progressBar.isVisible = false
                     swipeRefreshLayout.isRefreshing = false
                 }
+            }
+        }*/
+        lifecycleScope.launchWhenCreated {
+            newsFlow.collectLatest{
+                binding.progressBar.isVisible = false
+                binding.swipeRefresh.isRefreshing = false
+                newsAdapter.submitData(it)
             }
         }
     }
@@ -86,7 +91,7 @@ class HomeFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        homeViewModel.fetchNews()
+        newsAdapter.refresh()
     }
 
     override fun onDestroyView() {

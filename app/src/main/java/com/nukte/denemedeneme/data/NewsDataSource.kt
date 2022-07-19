@@ -6,6 +6,6 @@ import com.nukte.denemedeneme.News
 import kotlinx.coroutines.flow.Flow
 
 interface NewsDataSource {
-     suspend fun getHomeNews() : Flow<PagingData<News>>
+     fun getHomeNews() : Flow<PagingData<News>>
      suspend fun searchHomeNews(query : String) : List<News>
 }

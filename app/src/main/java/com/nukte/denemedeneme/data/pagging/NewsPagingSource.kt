@@ -13,10 +13,11 @@ class NewsPagingSource(
     private val newsDao: NewsDao
 ) : PagingSource<Int, News>() {
     override fun getRefreshKey(state: PagingState<Int, News>): Int? {
-        return state.anchorPosition?.let { anchorPosition ->
+        return 1
+    /*state.anchorPosition?.let { anchorPosition ->
             state.closestPageToPosition(anchorPosition)?.prevKey?.plus(1)
                 ?: state.closestPageToPosition(anchorPosition)?.nextKey?.minus(1)
-        }
+        }*/
     }
 
     override suspend fun load(params: LoadParams<Int>): PagingSource.LoadResult<Int, News> {
@@ -36,13 +37,14 @@ class NewsPagingSource(
             }
             val nextKey =
                 if (news.isEmpty()) {
-                    null
+                    1
                 } else {
                     pageIndex + (params.loadSize / NETWORK_PAGE_SIZE)
                 }
             PagingSource.LoadResult.Page(
                 data = news,
-                prevKey = if (pageIndex == TMDB_STARTING_PAGE_INDEX) null else pageIndex,
+                prevKey = null,
+                //if (pageIndex == TMDB_STARTING_PAGE_INDEX) null else pageIndex,
                 nextKey = nextKey
             )
         } catch (exception: IOException) {

@@ -7,6 +7,7 @@ import com.nukte.denemedeneme.News
 import com.nukte.denemedeneme.data.NewsDataSource
 import com.nukte.denemedeneme.data.repository.NewsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -17,17 +18,18 @@ class HomeViewModel @Inject constructor(
     private val newsRepositoryImp: NewsRepository
 ) : ViewModel() {
     private val newsLiveData = MutableLiveData<PagingData<News>>()
-     val news: LiveData<PagingData<News>> = newsLiveData
+    val newsFlow : Flow<PagingData<News>> = newsDataSource.getHomeNews().cachedIn(viewModelScope)
+     //val news: LiveData<PagingData<News>> = newsLiveData
 
-    init {
+   /* init {
         fetchNews()
-    }
+    }*/
 
-    fun fetchNews() = viewModelScope.launch{
+    /*fun fetchNews() = viewModelScope.launch{
         newsDataSource.getHomeNews().cachedIn(viewModelScope).collect{
             newsLiveData.value = it
         }
-    }
+    }*/
 
     fun saveNews(news: News) = viewModelScope.launch {
         news.isSaved = true
