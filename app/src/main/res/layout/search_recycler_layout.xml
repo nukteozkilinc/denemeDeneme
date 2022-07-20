@@ -1,62 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/rec"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:backgroundTint="@color/white"
-    android:layout_margin="4dp">
+    app:cardCornerRadius="4dp"
+    app:cardElevation="@dimen/cardview_default_elevation"
+    android:layout_marginStart="18dp"
+    android:layout_marginEnd="14dp"
+    android:layout_marginTop="23dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <ImageView
             android:id="@+id/search_image_view"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            tools:src="@mipmap/ic_launcher" />
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            tools:src="@mipmap/ic_launcher"
+            app:circularflow_defaultRadius="4dp"
+            app:layout_constraintCircleRadius="4dp"
+            app:layout_constraintStart_toEndOf="@id/search_titleText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="43dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
 
         <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:id="@+id/search_titleText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_toEndOf="@id/search_image_view"
-            android:text="Haber Başlığı"
-            android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:text="Battlegrounds Mobile India iOS release date"
+            android:textColor="@color/navy_blue"
+            android:textSize="17sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/search_image_view"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginEnd="1dp"
+            android:layout_marginTop="17dp"
+            android:layout_marginStart="24dp"
+            />
 
         <TextView
-            android:id="@+id/search_descriptionText"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_below="@id/search_titleText"
-            android:layout_marginStart="8dp"
-            android:layout_toEndOf="@id/search_image_view"
-            android:text="Description"
-            android:textColor="@color/black"
-            android:textSize="15sp" />
+            android:id="@+id/search_descriptionText"
+            android:text="The reason behind their disappointment is that iPhone users have been.."
+            android:textColor="@color/navy_blue"
+            android:textSize="14sp"
+            android:alpha="0.6"
+            app:layout_constraintStart_toStartOf="@+id/search_titleText"
+            app:layout_constraintEnd_toEndOf="@+id/search_titleText"
+            app:layout_constraintTop_toBottomOf="@+id/search_titleText"
+            android:layout_marginTop="9dp"
+            android:layout_marginEnd="1dp"
+            />
 
         <TextView
             android:id="@+id/search_publishedAt"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/search_descriptionText"
-            android:layout_marginStart="8dp"
-            android:layout_toEndOf="@id/search_image_view"
-            android:text="Date"
-            android:textSize="10sp" />
-
+            android:layout_marginTop="24dp"
+            android:alpha="0.4"
+            android:text="42 mins ago"
+            android:textColor="@color/navy_blue"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@+id/search_titleText"
+            app:layout_constraintTop_toBottomOf="@+id/search_descriptionText"
+            />
 
         <com.github.ivbaranov.mfb.MaterialFavoriteButton
             android:id="@+id/search_save_button"
             android:layout_width="78dp"
             android:layout_height="69dp"
             android:layout_below="@+id/search_publishedAt"
-            android:layout_marginStart="174dp"
-            android:layout_marginTop="36dp"
             android:layout_toEndOf="@id/search_image_view"
             app:mfb_animate_favorite="true"
             app:mfb_animate_unfavorite="false"
@@ -67,7 +89,16 @@
             app:mfb_rotation_angle="360"
             app:mfb_rotation_duration="400"
             app:mfb_size="55"
-            app:mfb_type="heart" />
-    </RelativeLayout>
+            app:mfb_type="heart"
+            app:layout_constraintStart_toEndOf="@id/search_titleText"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/search_image_view"
+            android:layout_marginTop="23dp"
+            android:layout_marginEnd="37dp"
+            android:layout_marginStart="87dp"
+            android:layout_marginBottom="16dp"
+            />
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
