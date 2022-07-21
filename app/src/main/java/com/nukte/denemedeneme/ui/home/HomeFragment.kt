@@ -63,8 +63,27 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun initFloatActionButtonActions() = with(binding.floatingActionButton2) {
+
+    /*private fun initFloatActionButtonActions() = with(binding.floatingActionButton2) {
         setOnClickListener {
+            val action = HomeFragmentDirections.actionNavigationHomeToSearchFragment()
+            findNavController().navigate(action)
+        }
+    }*/
+
+    private fun initFloatActionButtonActions() = with(binding.fabMenuActions){
+        setOnClickListener{
+            if(binding.fabMenuActions.tag == "UNCLICK"){
+                binding.fabMenuActions.tag = "CLICK"
+                binding.fabMenuSearch.visibility = View.VISIBLE
+                binding.fabMenuSort.visibility = View.VISIBLE
+            }else{
+                binding.fabMenuActions.tag = "UNCLICK"
+                binding.fabMenuSearch.visibility = View.GONE
+                binding.fabMenuSort.visibility = View.GONE
+            }
+        }
+        binding.fabMenuSearch.setOnClickListener {
             val action = HomeFragmentDirections.actionNavigationHomeToSearchFragment()
             findNavController().navigate(action)
         }

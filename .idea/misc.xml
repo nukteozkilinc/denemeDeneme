@@ -12,7 +12,7 @@
         <entry key="..\:/SDK/denemeDeneme/app/src/main/res/drawable/save_button.xml" value="0.2866666666666667" />
         <entry key="..\:/SDK/denemeDeneme/app/src/main/res/drawable/save_button_image.xml" value="0.2866666666666667" />
         <entry key="..\:/SDK/denemeDeneme/app/src/main/res/font/title_font.xml" value="0.1" />
-        <entry key="..\:/SDK/denemeDeneme/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/SDK/denemeDeneme/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/SDK/denemeDeneme/app/src/main/res/layout/activity_splash_screen.xml" value="0.264" />
         <entry key="..\:/SDK/denemeDeneme/app/src/main/res/layout/date_layout.xml" value="0.4" />
         <entry key="..\:/SDK/denemeDeneme/app/src/main/res/layout/deneme_layout.xml" value="0.1" />
@@ -23,7 +23,7 @@
         <entry key="..\:/SDK/denemeDeneme/app/src/main/res/layout/detail_screen_fragment.xml" value="0.2" />
         <entry key="..\:/SDK/denemeDeneme/app/src/main/res/layout/fragment_dashboard.xml" value="0.264" />
         <entry key="..\:/SDK/denemeDeneme/app/src/main/res/layout/fragment_favorite.xml" value="0.264" />
-        <entry key="..\:/SDK/denemeDeneme/app/src/main/res/layout/fragment_home.xml" value="0.264" />
+        <entry key="..\:/SDK/denemeDeneme/app/src/main/res/layout/fragment_home.xml" value="0.2" />
         <entry key="..\:/SDK/denemeDeneme/app/src/main/res/layout/fragment_notifications.xml" value="0.264" />
         <entry key="..\:/SDK/denemeDeneme/app/src/main/res/layout/fragment_search.xml" value="0.275" />
         <entry key="..\:/SDK/denemeDeneme/app/src/main/res/layout/recycler_layout.xml" value="0.4" />
