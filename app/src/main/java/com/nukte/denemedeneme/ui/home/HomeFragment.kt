@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.bumptech.glide.load.engine.Resource
 import com.nukte.denemedeneme.*
+import com.nukte.denemedeneme.base.BaseFragment
 import com.nukte.denemedeneme.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
@@ -19,19 +20,10 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class HomeFragment : Fragment() {
+class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
     private val homeViewModel: HomeViewModel by viewModels()
-    private var _binding: FragmentHomeBinding? = null
-    private val binding get() = _binding!!
     private val newsAdapter by lazy { ItemListAdapter() }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        return binding.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -111,10 +103,5 @@ class HomeFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         newsAdapter.refresh()
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }

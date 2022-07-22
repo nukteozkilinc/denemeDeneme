@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.nukte.denemedeneme.databinding.SearchRecyclerLayoutBinding
+import com.nukte.denemedeneme.model.News
 
 class SearchAdapter() : ListAdapter<News,SearchAdapter.SearchAdapterViewHolder> (NewsComparator){
     var onItemClicked: ((news: News) -> Unit)? = null

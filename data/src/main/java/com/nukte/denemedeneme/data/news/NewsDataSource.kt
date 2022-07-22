@@ -1,8 +1,7 @@
-package com.nukte.denemedeneme.data
+package com.nukte.denemedeneme.data.news
 
-import androidx.lifecycle.LiveData
 import androidx.paging.PagingData
-import com.nukte.denemedeneme.News
+import com.nukte.denemedeneme.model.News
 import kotlinx.coroutines.flow.Flow
 
 interface NewsDataSource {

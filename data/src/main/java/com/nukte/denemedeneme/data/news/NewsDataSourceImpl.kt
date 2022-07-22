@@ -1,17 +1,16 @@
-package com.nukte.denemedeneme.data
+package com.nukte.denemedeneme.data.news
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.nukte.denemedeneme.News
-import com.nukte.denemedeneme.api.NewsApi
-import com.nukte.denemedeneme.data.pagging.NewsPagingSource
+import com.nukte.denemedeneme.model.News
 import com.nukte.denemedeneme.db.NewsDao
+import com.nukte.denemedeneme.model.NewsPagingSource
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class NewsDataSourceImpl @Inject constructor(
-    private val api: NewsApi,
+    private val api: com.nukte.denemedeneme.network.NewsApi,
     private val newsDao: NewsDao
 ) : NewsDataSource {
         override fun getHomeNews(): Flow<PagingData<News>> {

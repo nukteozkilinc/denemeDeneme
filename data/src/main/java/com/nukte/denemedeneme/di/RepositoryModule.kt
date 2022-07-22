@@ -1,9 +1,9 @@
 package com.nukte.denemedeneme.di
 
-import com.nukte.denemedeneme.data.NewsDataSource
-import com.nukte.denemedeneme.data.NewsDataSourceImpl
-import com.nukte.denemedeneme.data.repository.NewsRepository
-import com.nukte.denemedeneme.data.repository.NewsRepositoryImpl
+import com.nukte.denemedeneme.data.news.NewsDataSource
+import com.nukte.denemedeneme.data.news.NewsDataSourceImpl
+import com.nukte.denemedeneme.repository.NewsRepository
+import com.nukte.denemedeneme.repository.NewsRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

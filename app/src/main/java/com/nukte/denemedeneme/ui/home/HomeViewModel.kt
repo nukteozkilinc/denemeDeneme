@@ -3,12 +3,11 @@ package com.nukte.denemedeneme.ui.home
 import androidx.lifecycle.*
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.nukte.denemedeneme.News
-import com.nukte.denemedeneme.data.NewsDataSource
-import com.nukte.denemedeneme.data.repository.NewsRepository
+import com.nukte.denemedeneme.model.News
+import com.nukte.denemedeneme.data.news.NewsDataSource
+import com.nukte.denemedeneme.repository.NewsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

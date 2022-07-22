@@ -1,6 +1,5 @@
 package com.nukte.denemedeneme.di
 
-import com.nukte.denemedeneme.api.NewsApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -47,14 +46,14 @@ object NetworkModule {
     fun provideRetrofit(okHttp : OkHttpClient) : Retrofit =
         Retrofit.Builder()
             .client(okHttp)
-            .baseUrl(NewsApi.BASE_URL)
+            .baseUrl(com.nukte.denemedeneme.network.NewsApi.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
     @Provides
     @Singleton
-    fun provideNewsApi(retrofit: Retrofit) : NewsApi =
-        retrofit.create(NewsApi::class.java)
+    fun provideNewsApi(retrofit: Retrofit) : com.nukte.denemedeneme.network.NewsApi =
+        retrofit.create(com.nukte.denemedeneme.network.NewsApi::class.java)
 
 
 }

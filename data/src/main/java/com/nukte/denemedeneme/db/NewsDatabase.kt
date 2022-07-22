@@ -1,7 +1,7 @@
 package com.nukte.denemedeneme.db
 
 import androidx.room.*
-import com.nukte.denemedeneme.News
+import com.nukte.denemedeneme.model.News
 
 
 @Database(

@@ -1,9 +1,12 @@
 package com.nukte.denemedeneme.ui.detail
+
 import android.content.Intent
 import android.content.Intent.FLAG_GRANT_READ_URI_PERMISSION
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import com.nukte.denemedeneme.model.News
+import com.nukte.denemedeneme.model.NewsResponse
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
@@ -16,15 +19,15 @@ import java.net.URI
 @AndroidEntryPoint
 class DetailScreen : Fragment() {
 
-    private val args : DetailScreenArgs by navArgs()
-    private val detailScreenViewModel : DetailScreenViewModel by viewModels()
+    private val args: DetailScreenArgs by navArgs()
+    private val detailScreenViewModel: DetailScreenViewModel by viewModels()
     private var _binding: DetailScreenFragmentBinding? = null
     private val binding get() = _binding!!
 
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         _binding = DetailScreenFragmentBinding.inflate(
             inflater, container, false
@@ -45,21 +48,21 @@ class DetailScreen : Fragment() {
         }
 
 
-        binding.saveButton.setOnFavoriteChangeListener{_,favorite ->
+        binding.saveButton.setOnFavoriteChangeListener { _, favorite ->
             args.news.isSaved = true
-            when(favorite){
+            when (favorite) {
                 true -> detailScreenViewModel.saveNews(args.news)
             }
 
         }
-        binding.saveButton.setOnFavoriteAnimationEndListener{_,favorite->
+        binding.saveButton.setOnFavoriteAnimationEndListener { _, favorite ->
             args.news.isSaved = false
-            when(favorite){
+            when (favorite) {
                 false -> detailScreenViewModel.deleteNews(args.news)
             }
         }
 
-        binding.shareButton.setOnClickListener{
+        binding.shareButton.setOnClickListener {
             val uri = URI(args.news.link)
             println("URL $uri")
             shareNews(uri)
@@ -67,11 +70,11 @@ class DetailScreen : Fragment() {
         }
     }
 
-    private fun shareNews(uri : URI){
-        val intent = Intent( )
+    private fun shareNews(uri: URI) {
+        val intent = Intent()
         intent.addFlags(FLAG_GRANT_READ_URI_PERMISSION)
         intent.action = Intent.ACTION_SEND
-        intent.putExtra(Intent.EXTRA_TEXT,"Habere Göz At! ${uri.toURL()}")
+        intent.putExtra(Intent.EXTRA_TEXT, "Habere Göz At! ${uri.toURL()}")
         intent.type = "text/plugin"
         startActivity(Intent.createChooser(intent, "Share to : "))
 

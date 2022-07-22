@@ -1,8 +1,8 @@
 package com.nukte.denemedeneme.ui.favorite
 
 import androidx.lifecycle.*
-import com.nukte.denemedeneme.News
-import com.nukte.denemedeneme.data.repository.NewsRepositoryImpl
+import com.nukte.denemedeneme.model.News
+import com.nukte.denemedeneme.repository.NewsRepositoryImpl
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

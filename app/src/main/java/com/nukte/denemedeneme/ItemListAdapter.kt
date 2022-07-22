@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.nukte.denemedeneme.databinding.RecyclerLayoutBinding
+import com.nukte.denemedeneme.model.News
 
 class ItemListAdapter() : PagingDataAdapter<News, ItemListAdapter.ItemListViewHolder>(NewsComparator) {
 

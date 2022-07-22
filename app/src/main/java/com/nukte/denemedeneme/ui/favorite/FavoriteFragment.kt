@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import com.nukte.denemedeneme.model.News
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavDirections
@@ -14,7 +15,6 @@ import androidx.paging.ExperimentalPagingApi
 import com.nukte.denemedeneme.SaveAdapter
 import com.nukte.denemedeneme.databinding.FragmentFavoriteBinding
 import dagger.hilt.android.AndroidEntryPoint
-import io.reactivex.annotations.Experimental
 import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject
 
@@ -24,15 +24,15 @@ class FavoriteFragment : Fragment() {
     private val favoriteViewModel: FavoriteViewModel by viewModels()
     private var _binding: FragmentFavoriteBinding? = null
     private val binding get() = _binding!!
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentFavoriteBinding.inflate(inflater, container, false)
         return binding.root
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -40,7 +40,7 @@ class FavoriteFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        var action : NavDirections
+        var action: NavDirections
 
         val saveAdapter = SaveAdapter()
         binding.saveRecyclerView.adapter = saveAdapter
@@ -54,7 +54,7 @@ class FavoriteFragment : Fragment() {
             saveAdapter.submitList(it)
         }
 
-        saveAdapter.onUnsaveButtonClicked={
+        saveAdapter.onUnsaveButtonClicked = {
             favoriteViewModel.deleteNews(it)
         }
 

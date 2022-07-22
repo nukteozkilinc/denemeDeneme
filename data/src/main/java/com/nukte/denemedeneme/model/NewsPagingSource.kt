@@ -1,15 +1,13 @@
-package com.nukte.denemedeneme.data.pagging
+package com.nukte.denemedeneme.model
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.nukte.denemedeneme.News
-import com.nukte.denemedeneme.api.NewsApi
 import com.nukte.denemedeneme.db.NewsDao
 import retrofit2.HttpException
 import java.io.IOException
 
 class NewsPagingSource(
-    private val api: NewsApi,
+    private val api: com.nukte.denemedeneme.network.NewsApi,
     private val newsDao: NewsDao
 ) : PagingSource<Int, News>() {
     override fun getRefreshKey(state: PagingState<Int, News>): Int? {

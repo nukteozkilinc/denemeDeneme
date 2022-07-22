@@ -41,7 +41,7 @@
         >
         <argument
             android:name="news"
-            app:argType="com.nukte.denemedeneme.News"
+            app:argType="com.nukte.denemedeneme.model.News"
              />
     </fragment>
     <fragment

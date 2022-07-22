@@ -7,8 +7,8 @@ import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.nukte.denemedeneme.databinding.SaveRecyclerLayoutBinding
+import com.nukte.denemedeneme.model.News
 import java.time.format.DateTimeFormatter
-import java.time.format.DateTimeFormatterBuilder
 
 class SaveAdapter() : androidx.recyclerview.widget.ListAdapter<News, SaveAdapter.SaveViewHolder>(NewsComparator) {
     var onItemClicked: ((news: News) -> Unit)? = null
@@ -19,7 +19,7 @@ class SaveAdapter() : androidx.recyclerview.widget.ListAdapter<News, SaveAdapter
     class SaveViewHolder (val binding : SaveRecyclerLayoutBinding)
         : RecyclerView.ViewHolder(binding.root) {
 
-        fun bindSaveItems(news:News){
+        fun bindSaveItems(news: News){
                 Glide.with(itemView).load(news.media).into(binding.saveImageView)
                 binding.saveDescriptionText.text = news.excerpt
                 binding.saveTitleText.text = news.title

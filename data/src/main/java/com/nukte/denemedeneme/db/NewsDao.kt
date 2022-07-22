@@ -1,9 +1,8 @@
 package com.nukte.denemedeneme.db
 
 import androidx.lifecycle.LiveData
-import androidx.paging.PagingSource
 import androidx.room.*
-import com.nukte.denemedeneme.News
+import com.nukte.denemedeneme.model.News
 
 @Dao
 interface NewsDao {

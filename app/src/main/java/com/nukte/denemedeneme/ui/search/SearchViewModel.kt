@@ -4,9 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.nukte.denemedeneme.News
-import com.nukte.denemedeneme.data.NewsDataSource
-import com.nukte.denemedeneme.data.repository.NewsRepository
+import com.nukte.denemedeneme.model.News
+import com.nukte.denemedeneme.data.news.NewsDataSource
+import com.nukte.denemedeneme.repository.NewsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.Flow
