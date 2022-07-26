@@ -1,18 +1,18 @@
 plugins {
-    id 'com.android.library'
-    id 'kotlin-android'
-    id 'kotlin-kapt'
-    id 'dagger.hilt.android.plugin'
-    id 'kotlinx-serialization'
+    alias libs.plugins.android.library
+    alias libs.plugins.kotlin.android
+    alias libs.plugins.hilt.plugin
+    alias libs.plugins.kotlin.kapt
+    alias libs.plugins.kotlin.serialization
 }
 
 android {
     namespace = "com.nukte.denemedeneme"
-    compileSdkVersion 31
+    compileSdkVersion 32
 
     defaultConfig {
         minSdkVersion 24
-        targetSdkVersion 31
+        targetSdkVersion 32
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -34,7 +34,6 @@ android {
     }
 
     dependencies {
-
         implementation libs.retrofit
         implementation libs.convertor
         implementation libs.bundles.okhttp
@@ -45,6 +44,5 @@ android {
         implementation libs.bundles.room
         kapt libs.roomcompiler
         implementation libs.databindingruntime
-
     }
 }

@@ -8,7 +8,8 @@ import com.nukte.denemedeneme.model.News
     entities = [
         News::class
                ],
-    version = 2
+    version = 2,
+    exportSchema = false
 )
 abstract class NewsDatabase : RoomDatabase() {
     abstract fun newsDao(): NewsDao

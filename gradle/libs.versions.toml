@@ -18,13 +18,21 @@ coroutine2 = "1.6.0"
 constraintlayout = "2.1.4"
 material = "1.6.1"
 
-gradleplugin = "7.0.4"
+gradleplugin = "7.2.0"
 kotlin = "1.5.20"
 safeargsplugin = "2.5.0"
 hiltplugin = "2.42"
 seriplugin = "1.6.0"
 
 
+[plugins]
+android-application = { id = "com.android.application", version.ref = "gradleplugin" }
+android-library = { id = "com.android.library", version.ref = "gradleplugin" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+hilt-plugin = { id = "com.google.dagger.hilt.android", version.ref = "hiltplugin" }
+safe-args = { id = "androidx.navigation.safeargs.kotlin", version.ref = "navigation" }
 
 [libraries]
 room-ktx = {module = "androidx.room:room-ktx", version.ref="room"}
