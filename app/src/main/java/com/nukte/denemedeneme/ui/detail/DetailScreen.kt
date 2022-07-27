@@ -12,61 +12,54 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
+import com.nukte.denemedeneme.R
+import com.nukte.denemedeneme.base.BaseFragment
 import com.nukte.denemedeneme.databinding.DetailScreenFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
 import java.net.URI
 
 @AndroidEntryPoint
-class DetailScreen : Fragment() {
+class DetailScreen : BaseFragment<DetailScreenFragmentBinding>(R.layout.detail_screen_fragment) {
 
     private val args: DetailScreenArgs by navArgs()
     private val detailScreenViewModel: DetailScreenViewModel by viewModels()
-    private var _binding: DetailScreenFragmentBinding? = null
-    private val binding get() = _binding!!
-
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View {
-        _binding = DetailScreenFragmentBinding.inflate(
-            inflater, container, false
-        )
-        val root: View = binding.root
-        return root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        shareClickListener()
+        saveClickListener()
 
-        args.news?.let {
+
+        args.news.let {
             Glide.with(view).load(it.media).into(binding.imageDetail)
             binding.titleDetail.text = it.title
             binding.contentDetail.text = it.summary
             binding.dateDetail.text = it.published_date
             binding.saveButton.isFavorite = it.isSaved
         }
+    }
 
+    private fun shareClickListener() = with(binding.shareButton){
+        val uri = URI(args.news.link)
+        println("URL $uri")
+        shareNews(uri)
+    }
 
-        binding.saveButton.setOnFavoriteChangeListener { _, favorite ->
+    private fun saveClickListener() = with(binding.saveButton){
+        setOnFavoriteChangeListener { _, favorite ->
             args.news.isSaved = true
             when (favorite) {
                 true -> detailScreenViewModel.saveNews(args.news)
+                else -> {}
             }
 
         }
-        binding.saveButton.setOnFavoriteAnimationEndListener { _, favorite ->
+        setOnFavoriteAnimationEndListener { _, favorite ->
             args.news.isSaved = false
             when (favorite) {
                 false -> detailScreenViewModel.deleteNews(args.news)
+                else -> {}
             }
-        }
-
-        binding.shareButton.setOnClickListener {
-            val uri = URI(args.news.link)
-            println("URL $uri")
-            shareNews(uri)
-
         }
     }
 
@@ -77,7 +70,5 @@ class DetailScreen : Fragment() {
         intent.putExtra(Intent.EXTRA_TEXT, "Habere Göz At! ${uri.toURL()}")
         intent.type = "text/plugin"
         startActivity(Intent.createChooser(intent, "Share to : "))
-
-
     }
 }

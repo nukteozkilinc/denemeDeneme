@@ -12,51 +12,51 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import androidx.paging.ExperimentalPagingApi
+import com.nukte.denemedeneme.R
 import com.nukte.denemedeneme.SaveAdapter
+import com.nukte.denemedeneme.base.BaseFragment
 import com.nukte.denemedeneme.databinding.FragmentFavoriteBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class FavoriteFragment : Fragment() {
+class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>(R.layout.fragment_favorite) {
 
     private val favoriteViewModel: FavoriteViewModel by viewModels()
-    private var _binding: FragmentFavoriteBinding? = null
-    private val binding get() = _binding!!
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View {
-        _binding = FragmentFavoriteBinding.inflate(inflater, container, false)
-        return binding.root
+    private val saveAdapter by lazy { SaveAdapter() }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initRecycler()
+        initAdapterClickListener()
+        observeViewModel()
+    }
+
+    private fun observeViewModel() = with(favoriteViewModel){
+         getSavedNews().observe(viewLifecycleOwner) {
+            saveAdapter.submitList(it)
+        }
+    }
+
+    private fun initRecycler() = with(binding.saveRecyclerView) {
+        adapter = saveAdapter
+    }
+
+    private fun initAdapterClickListener() = with(saveAdapter){
+        saveAdapter.onItemClicked = {
+            var action = FavoriteFragmentDirections.actionNavigationFavoriteToDetailScreen(it)
+            findNavController().navigate(action)
+        }
+        saveAdapter.onUnsaveButtonClicked = {
+            favoriteViewModel.deleteNews(it)
+        }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        _binding = null
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        var action: NavDirections
-
-        val saveAdapter = SaveAdapter()
-        binding.saveRecyclerView.adapter = saveAdapter
-
-        saveAdapter.onItemClicked = {
-            action = FavoriteFragmentDirections.actionNavigationFavoriteToDetailScreen(it)
-            findNavController().navigate(action)
-        }
-
-        favoriteViewModel.getSavedNews().observe(viewLifecycleOwner) {
-            saveAdapter.submitList(it)
-        }
-
-        saveAdapter.onUnsaveButtonClicked = {
-            favoriteViewModel.deleteNews(it)
-        }
-
+        //binding = null
+        /*private var _binding: FragmentFavoriteBinding? = null
+        private val binding get() = _binding!! */
     }
 }
