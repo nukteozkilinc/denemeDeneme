@@ -41,8 +41,9 @@ class DetailScreen : BaseFragment<DetailScreenFragmentBinding>(R.layout.detail_s
 
     private fun shareClickListener() = with(binding.shareButton){
         val uri = URI(args.news.link)
-        println("URL $uri")
-        shareNews(uri)
+        setOnClickListener {
+            shareNews(uri)
+        }
     }
 
     private fun saveClickListener() = with(binding.saveButton){

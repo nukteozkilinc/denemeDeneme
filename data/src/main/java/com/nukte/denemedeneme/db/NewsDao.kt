@@ -6,7 +6,7 @@ import com.nukte.denemedeneme.model.News
 
 @Dao
 interface NewsDao {
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(news: News)
 
     @Query("SELECT * FROM newsTable ") //@get:Query
